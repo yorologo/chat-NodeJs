@@ -1,0 +1,29 @@
+{
+  "name": "backend-node",
+  "version": "0.1.0",
+  "description": "Un chat hecho en Node.Js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yorologo/chat-NodeJs.git"
+  },
+  "keywords": [
+    "chat",
+    "node",
+    "javascript",
+    "js",
+    "server"
+  ],
+  "author": "Yorologo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yorologo/chat-NodeJs/issues"
+  },
+  "homepage": "https://github.com/yorologo/chat-NodeJs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
