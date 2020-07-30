@@ -1,25 +1,32 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const router = express.Router();
 
-let app = express();
 let port = 3000;
+let app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(router);
 
 // app.use("/", (request, response) => {
 //   response.send("Hola");
 // });
 
 // GET method route
-app.get("/message", function (req, res) {
-  res.send("Lista de mensajes");
+router.get("/message", function (request, response) {
+  response.send("Lista de mensajes");
 });
 
 // POST method route
-app.post("/message", function (req, res) {
-  res.send("Mensaje añadido correctamente");
+router.post("/message", function (request, response) {
+  console.log(request.query);
+  console.log(request.body);
+  response.send(`Mensaje ${request.body.text} añadido correctamente`);
 });
 
 // DELETE method route
-app.delete("/message", function (req, res) {
-  res.send("Mensaje borrado correctamente");
+router.delete("/message", function (request, response) {
+  response.send("Mensaje borrado correctamente");
 });
 
 app.listen(port);
