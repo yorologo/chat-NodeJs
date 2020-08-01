@@ -23,7 +23,14 @@ router.get("/message", function (request, response) {
 router.post("/message", function (request, response) {
   console.log(request.query);
   console.log(request.body);
-  response.send(`Mensaje ${request.body.text} añadido correctamente`);
+  // Respuesta Vacía
+  response.status(201).send();
+  // // Respuesta Plana
+  // response.status(201).send("Creado correctamente");
+  // // Respuesta con Datos
+  // response.status(201).send({ error: "", body: "Creado correctamente" });
+  // // Respuesta Estructurada
+  // response.status(201).send([{ error: "", body: "Creado correctamente" }]);
 });
 
 // DELETE method route
