@@ -37,5 +37,7 @@ router.delete("/message", function (req, res) {
   response.success(req, res, "Mensaje borrado correctamente");
 });
 
+app.use("/app", express.static("public"));
+
 app.listen(port);
 console.log(`La aplicacion esta escuchando en http://localhost:${port}`);
