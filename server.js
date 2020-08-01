@@ -2,40 +2,39 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const router = express.Router();
 
+const response = require("./network/response");
+
 let port = 3000;
 let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(router);
 
-// app.use("/", (request, response) => {
-//   response.send("Hola");
+// app.use("/", (req, res) => {
+//   res.send("Hola");
 // });
 
 // GET method route
-router.get("/message", function (request, response) {
-  console.log(request.headers);
-  response.header({ "custom-header": "Nuestro valor personalizado" });
-  response.send("Lista de mensajes");
+router.get("/message", function (req, res) {
+  console.log(req.headers);
+  res.header({ "custom-header": "Nuestro valor personalizado" });
+  response.success(req, res, "Lista de mensajes");
 });
 
 // POST method route
-router.post("/message", function (request, response) {
-  console.log(request.query);
-  console.log(request.body);
-  // Respuesta Vacía
-  response.status(201).send();
-  // // Respuesta Plana
-  // response.status(201).send("Creado correctamente");
-  // // Respuesta con Datos
-  // response.status(201).send({ error: "", body: "Creado correctamente" });
-  // // Respuesta Estructurada
-  // response.status(201).send([{ error: "", body: "Creado correctamente" }]);
+router.post("/message", function (req, res) {
+  console.log(req.query);
+  console.log(req.body);
+  if (req.query.error == "ok") {
+    response.error(req, res, "Error simulado");
+  } else {
+    response.success(req, res, "Creado correctamente", 201);
+  }
 });
 
 // DELETE method route
-router.delete("/message", function (request, response) {
-  response.send("Mensaje borrado correctamente");
+router.delete("/message", function (req, res) {
+  response.success(req, res, "Mensaje borrado correctamente");
 });
 
 app.listen(port);
