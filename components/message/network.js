@@ -5,9 +5,14 @@ const controller = require("./controller");
 
 // GET method route
 router.get("/", function (req, res) {
-  console.log(req.headers);
-  res.header({ "custom-header": "Nuestro valor personalizado" });
-  response.success(req, res, "Lista de mensajes");
+  controller
+    .getMessages()
+    .then((messageList) => {
+      response.success(req, res, messageList);
+    })
+    .catch((error) => {
+      response.error(req, res, "Error inesperado", 500, error);
+    });
 });
 
 // POST method route
@@ -23,7 +28,7 @@ router.post("/", function (req, res) {
         res,
         "Error inesperado",
         400,
-        "error en el controlador"
+        "Error en el controlador"
       );
     });
 });

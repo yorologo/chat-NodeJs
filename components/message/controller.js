@@ -1,3 +1,4 @@
+const store = require("./store");
 const moment = require("moment");
 let now = moment();
 
@@ -17,11 +18,18 @@ function addMessage(user, message) {
       message: message,
     };
 
-    console.log(fullMessage);
+    store.add(fullMessage);
     resolve(fullMessage);
+  });
+}
+
+function getMessages() {
+  return new Promise((resolve, reject) => {
+    resolve(store.list());
   });
 }
 
 module.exports = {
   addMessage,
+  getMessages,
 };
