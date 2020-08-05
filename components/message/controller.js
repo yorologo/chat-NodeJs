@@ -14,7 +14,7 @@ function addMessage(user, message) {
     }
     const fullMessage = {
       user: user,
-      time: now.format("YYYY/MM/DD HH:mm:ss"),
+      time: now.toISOString(),
       message: message,
     };
 
