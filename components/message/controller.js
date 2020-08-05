@@ -1,5 +1,6 @@
 const store = require("./store");
 const moment = require("moment");
+const { response } = require("express");
 let now = moment();
 
 function addMessage(user, message) {
@@ -29,7 +30,23 @@ function getMessages() {
   });
 }
 
+function updateMessage(id, message) {
+  return new Promise(async (resolve, reject) => {
+    if (!id || !message) {
+      console.error(
+        `[message controller] [${now.format(
+          "YYYY/MM/DD HH:mm:ss"
+        )}] No hay usuario o mensaje`
+      );
+      return reject("Los datos son incorrectos");
+    }
+    const result = await store.updateText(id, message);
+    resolve(result);
+  });
+}
+
 module.exports = {
   addMessage,
   getMessages,
+  updateMessage,
 };
