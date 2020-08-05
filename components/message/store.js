@@ -12,13 +12,18 @@ db.connect(
 console.log("[database] Conexion realizada correctamente");
 
 function addMessage(message) {
-  console.log(message);
   const myMessage = new Model(message);
   myMessage.save();
 }
 
-async function listMessages() {
-  const messages = await Model.find();
+async function listMessages(filterUser) {
+  let filter = {};
+  if (filterUser !== null) {
+    filter = {
+      user: filterUser,
+    };
+  }
+  const messages = await Model.find(filter);
   return messages;
 }
 
