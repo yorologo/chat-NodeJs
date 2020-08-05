@@ -11,7 +11,7 @@ function addMessage(user, message) {
           "YYYY/MM/DD HH:mm:ss"
         )}] No hay usuario o mensaje`
       );
-      return reject("Los datos son incorrectos");
+      return reject("Los datos del mensaje son inconsistente");
     }
     const fullMessage = {
       user: user,
