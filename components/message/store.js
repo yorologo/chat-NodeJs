@@ -5,16 +5,16 @@ function addMessage(message) {
   myMessage.save();
 }
 
-function listMessages(filterUser) {
+function listMessages(filterChat) {
   return new Promise((resolve, reject) => {
     let filter = {};
-    if (filterUser !== null) {
+    if (filterChat !== null) {
       filter = {
-        user: filterUser,
+        user: filterChat,
       };
     }
     Model.find(filter)
-      .populate("user")
+      .populate("chat")
       .exec((error, populated) => {
         if (error) {
           reject(error);

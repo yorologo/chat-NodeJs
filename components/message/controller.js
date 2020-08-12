@@ -3,9 +3,9 @@ const moment = require("moment");
 const { response } = require("express");
 let now = moment();
 
-function addMessage(user, message) {
+function addMessage(chat, user, message) {
   return new Promise((resolve, reject) => {
-    if (!user || !message) {
+    if (!chat || !user || !message) {
       console.error(
         `[message controller] [${now.format(
           "YYYY/MM/DD HH:mm:ss"
@@ -14,6 +14,7 @@ function addMessage(user, message) {
       return reject("Los datos del mensaje son inconsistente");
     }
     const fullMessage = {
+      chat: chat,
       user: user,
       time: now.toISOString(),
       message: message,
@@ -24,9 +25,9 @@ function addMessage(user, message) {
   });
 }
 
-function getMessages(filterUser) {
+function getMessages(filterChat) {
   return new Promise((resolve, reject) => {
-    resolve(store.list(filterUser));
+    resolve(store.list(filterChat));
   });
 }
 
