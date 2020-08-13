@@ -36,9 +36,9 @@ function addMessage(chat, user, message, file) {
   });
 }
 
-function getMessages(filterChat) {
+function getMessages(filterUser) {
   return new Promise((resolve, reject) => {
-    resolve(store.list(filterChat));
+    resolve(store.list(filterUser));
   });
 }
 
