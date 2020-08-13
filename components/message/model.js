@@ -6,6 +6,7 @@ const mySchema = new Schema({
   user: { type: Schema.ObjectId, ref: "User" },
   time: { type: Date, required: true },
   message: { type: String, required: true },
+  message: { type: String, required: false },
 });
 
 const model = mongoose.model("Message", mySchema);

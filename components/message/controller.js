@@ -3,7 +3,7 @@ const moment = require("moment");
 const { response } = require("express");
 let now = moment();
 
-function addMessage(chat, user, message) {
+function addMessage(chat, user, message, file) {
   return new Promise((resolve, reject) => {
     if (!chat || !user || !message) {
       console.error(
@@ -13,11 +13,18 @@ function addMessage(chat, user, message) {
       );
       return reject("Los datos del mensaje son inconsistente");
     }
+
+    let fileUrl = "";
+    if (file) {
+      fileUrl = `http://localhost:3000/app/files/${file.filename}`;
+    }
+
     const fullMessage = {
       chat: chat,
       user: user,
       time: now.toISOString(),
       message: message,
+      file: fileUrl,
     };
 
     store.add(fullMessage);
