@@ -1,6 +1,7 @@
-const store = require("./store");
 const moment = require("moment");
-const { response } = require("express");
+const store = require("./store");
+const { socket } = require("../../socket");
+
 let now = moment();
 
 function addMessage(chat, user, message, file) {
@@ -28,6 +29,9 @@ function addMessage(chat, user, message, file) {
     };
 
     store.add(fullMessage);
+
+    socket.io.emit("message", fullMessage);
+
     resolve(fullMessage);
   });
 }
