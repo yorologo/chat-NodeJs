@@ -1,6 +1,7 @@
 const moment = require("moment");
 const store = require("./store");
 const { socket } = require("../../socket");
+const config = require("../../config");
 
 let now = moment();
 
@@ -17,7 +18,7 @@ function addMessage(chat, user, message, file) {
 
     let fileUrl = "";
     if (file) {
-      fileUrl = `http://localhost:3000/app/files/${file.filename}`;
+      fileUrl = `${config.host}/${config.publicRoute}/${config.filesRoute}/${file.filename}`;
     }
 
     const fullMessage = {

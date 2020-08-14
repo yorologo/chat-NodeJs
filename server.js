@@ -4,15 +4,13 @@ const server = require("http").Server(app);
 
 const cors = require("cors");
 const bodyParser = require("body-parser");
+
+const config = require("./config");
 const socket = require("./socket");
 const db = require("./db");
 const router = require("./network/routes");
 
-db(
-  "mongodb+srv://db_newUser:6MxEPqi3aQQnjjCM@cluster0.yebum.mongodb.net/CursoNodeJS?retryWrites=true&w=majority"
-);
-
-let port = 3000;
+db(config.dbUrl);
 
 app.use(cors());
 
@@ -23,8 +21,8 @@ socket.connect(server);
 
 router(app);
 
-app.use("/app", express.static("public"));
+app.use(config.publicRoute, express.static("public"));
 
 server.listen(port, function () {
-  console.log(`La aplicacion esta escuchando en http://localhost:${port}`);
+  console.log(`La aplicacion esta escuchando en ${config.host}:${config.port}`);
 });
